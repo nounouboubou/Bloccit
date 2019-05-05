@@ -14,8 +14,9 @@
     "request": "^2.83.0"
   },
   "dependencies": {
+    "dotenv": "^5.0.0",
+    "ejs": "^2.5.7",
     "express": "^4.16.2",
-    "inquirer": "^6.2.2",
-    "dotenv": "^5.0.0"
+    "inquirer": "^6.2.2"
   }
 }
