@@ -10,11 +10,11 @@ module.exports = {
           res.render("topics/index", {topics});
         }
       })
-      }
+      },
 
     new(req, res, next){
         res.render("topics/new");
-      }
+      },
 
     create(req, res, next){
         let newTopic = {
@@ -28,7 +28,7 @@ module.exports = {
             res.redirect(303, `/topics/${topic.id}`);
           }
         });
-    }
+    },
 
     show(req, res, next){
 
@@ -42,7 +42,7 @@ module.exports = {
                res.render("topics/show", {topic});
              }
            });
-         }
+         },
 
     destroy(req, res, next){
         topicQueries.deleteTopic(req.params.id, (err, topic) => {
@@ -52,7 +52,7 @@ module.exports = {
           res.redirect(303, "/topics")
         }
       });
-    }
+    },
 
     edit(req, res, next){
       topicQueries.getTopic(req.params.id, (err, topic) => {
@@ -62,7 +62,7 @@ module.exports = {
           res.render("topics/edit", {topic});
         }
       });
-    }
+    },
 
     update(req, res, next){
 
