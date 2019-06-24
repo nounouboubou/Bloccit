@@ -1,19 +1,19 @@
-const topicQueries = require("../db/queries.topics.js");
+const topicQueries = require("../db/queries.Topic.js");
 
 
 module.exports = {
     index(req, res, next){
-      topicQueries.getAllTopics((err, topics) => {
+      topicQueries.getAllTopics((err, Topic) => {
         if(err){
           res.redirect(500, "static/index");
         } else {
-          res.render("topics/index", {topics});
+          res.render("Topic/index", {Topic});
         }
       })
       },
 
     new(req, res, next){
-        res.render("topics/new");
+        res.render("Topic/new");
       },
 
     create(req, res, next){
@@ -21,11 +21,11 @@ module.exports = {
           title: req.body.title,
           description: req.body.description
         };
-        topicQueries.addTopic(newTopic, (err, topic) => {
+        topicQueries.addTopic(newTopic, (err, Topic) => {
           if(err){
             res.redirect(500, "/topics/new");
           } else {
-            res.redirect(303, `/topics/${topic.id}`);
+            res.redirect(303, `/Topic/${Topic.id}`);
           }
         });
     },
@@ -33,45 +33,45 @@ module.exports = {
     show(req, res, next){
 
       //#1
-           topicQueries.getTopic(req.params.id, (err, topic) => {
+           topicQueries.getTopic(req.params.id, (err, Topic) => {
       
       //#2
-             if(err || topic == null){
+             if(err || Topic == null){
                res.redirect(404, "/");
              } else {
-               res.render("topics/show", {topic});
+               res.render("Topic/show", {Topic});
              }
            });
          },
 
     destroy(req, res, next){
-        topicQueries.deleteTopic(req.params.id, (err, topic) => {
+        topicQueries.deleteTopic(req.params.id, (err, Topic) => {
           if(err){
-          res.redirect(500, `/topics/${topic.id}`)
+          res.redirect(500, `/Topic/${Topic.id}`)
           } else {
-          res.redirect(303, "/topics")
+          res.redirect(303, "/Topic")
         }
       });
     },
 
     edit(req, res, next){
-      topicQueries.getTopic(req.params.id, (err, topic) => {
-        if(err || topic == null){
+      topicQueries.getTopic(req.params.id, (err, Topic) => {
+        if(err || Topic == null){
           res.redirect(404, "/");
         } else {
-          res.render("topics/edit", {topic});
+          res.render("Topic/edit", {Topic});
         }
       });
     },
 
     update(req, res, next){
 
-           topicQueries.updateTopic(req.params.id, req.body, (err, topic) => {
+           topicQueries.updateTopic(req.params.id, req.body, (err, Topic) => {
       
-             if(err || topic == null){
-               res.redirect(404, `/topics/${req.params.id}/edit`);
+             if(err || Topic == null){
+               res.redirect(404, `/Topic/${req.params.id}/edit`);
              } else {
-               res.redirect(`/topics/${topic.id}`);
+               res.redirect(`/Topic/${Topic.id}`);
              }
            });
          }

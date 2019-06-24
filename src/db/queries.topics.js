@@ -6,8 +6,8 @@ module.exports = {
   getAllTopics(callback){
     return Topic.all()
 
-    .then((topics) => {
-      callback(null, topics);
+    .then((Topic) => {
+      callback(null, Topic);
     })
     .catch((err) => {
       callback(err);
@@ -19,8 +19,8 @@ module.exports = {
       title: newTopic.title,
       description: newTopic.description
     })
-    .then((topic) => {
-      callback(null, topic);
+    .then((Topic) => {
+      callback(null, Topic);
     })
     .catch((err) => {
       callback(err);
@@ -29,8 +29,8 @@ module.exports = {
 
   getTopic(id, callback){
     return Topic.findById(id)
-    .then((topic) => {
-      callback(null, topic);
+    .then((Topic) => {
+      callback(null, Topic);
     })
     .catch((err) => {
       callback(err);
@@ -41,8 +41,8 @@ module.exports = {
     return Topic.destroy({
       where: {id}
     })
-    .then((topic) => {
-      callback(null, topic);
+    .then((Topic) => {
+      callback(null, Topic);
     })
     .catch((err) => {
       callback(err);
@@ -51,16 +51,16 @@ module.exports = {
 
   updateTopic(id, updatedTopic, callback){
     return Topic.findById(id)
-    .then((topic) => {
-      if(!topic){
+    .then((Topic) => {
+      if(!Topic){
         return callback("Topic not found");
       }
 
-      topic.update(updatedTopic, {
+      Topic.update(updatedTopic, {
         fields: Object.keys(updatedTopic)
       })
       .then(() => {
-        callback(null, topic);
+        callback(null, Topic);
       })
       .catch((err) => {
         callback(err);
